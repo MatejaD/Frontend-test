@@ -3,6 +3,11 @@
 @tailwind components;
 @tailwind utilities;
 
+
+body{
+  overflow-x: hidden;
+}
+
 input {
   transition: box-shadow .3s;
   background: lightgrey;
@@ -13,3 +18,69 @@ input:checked {
   /* box-shadow: inset 0 0 0 20px #555555; */
 }
 
+.selectdiv {
+  position: relative;
+  /*Don't really need this just for demo styling*/
+
+  float: left;
+}
+
+/*To remove button from IE11, thank you Matt */
+select::-ms-expand {
+  display: none;
+}
+
+.selectdiv:after {
+  content: '>';
+  font: 25px "Poppins", monospace;
+  color: #333;
+  -webkit-transform: rotate(90deg);
+  -moz-transform: rotate(90deg);
+  -ms-transform: rotate(90deg);
+  transform: rotate(90deg);
+  right: 2.5%;
+  /*Adjust for position however you want*/
+  cursor: pointer;
+  top: 45%;
+  margin-right: 2px;
+  /*left line */
+
+  position: absolute;
+  pointer-events: none;
+}
+
+.selectdiv select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  /* Add some styling */
+
+  display: block;
+  float: right;
+  color: #333;
+  -ms-word-break: normal;
+  word-break: normal;
+}
+
+/* Remove arrows for number inputs */
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+/* Checkmark */
+
+.check {
+  display: inline-block;
+  transform: rotate(45deg);
+  /* height: 45px; */
+  /* width: 16px; */
+  border-bottom: 7px solid green;
+  border-right: 7px solid green;
+}

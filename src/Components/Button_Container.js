@@ -1,29 +1,48 @@
 import React, { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 
+// Actions
+import { BACK, NEXT_STEP, CREATE_SUBGENRE } from "../Redux/actions"
+
 export default function Button_Container() {
-  const [isClickable, setIsClickable] = useState(false)
   const currentPage = useSelector((state) => state.currentPage)
   const subgenreName = useSelector((state) => state.subgenreName)
-
+  const subgenre = useSelector((state) => state.subgenre)
+  const isDescriptionRequired = useSelector(
+    (state) => state.isDescriptionRequired
+  )
   const dispatch = useDispatch()
 
   let genre = useSelector((state) => state.genre)
 
+  const [lastId, setLastId] = useState(25)
+
   const nextStep = () => {
     if (currentPage === 3) {
       if (!subgenreName) {
-        console.log("Wow not nice")
       } else {
-        dispatch({ type: "NEXT_STEP", payload: currentPage === 2 ? 2 : 1 })
+        setLastId(lastId + 1)
+
+        dispatch({ type: NEXT_STEP, payload: -1 })
+        dispatch({
+          type: CREATE_SUBGENRE,
+          payload: {
+            id: lastId,
+            name: subgenreName,
+            isDescriptionRequired: isDescriptionRequired,
+          },
+        })
       }
+    } else if (currentPage === 2) {
+      dispatch({ type: NEXT_STEP, payload: 2 })
+    } else if (currentPage === 4) {
     } else {
-      dispatch({ type: "NEXT_STEP", payload: currentPage === 2 ? 2 : 1 })
+      dispatch({ type: NEXT_STEP, payload: 1 })
     }
   }
 
   const back = () => {
-    dispatch({ type: "BACK", payload: currentPage === 4 ? 2 : 1 })
+    dispatch({ type: BACK, payload: currentPage === 4 ? 2 : 1 })
   }
 
   return (
@@ -36,14 +55,46 @@ export default function Button_Container() {
         Back
       </button>
       <button
-        type="submit"
-        disabled={genre ? false : true}
+        disabled={
+          currentPage === 1
+            ? genre
+              ? false
+              : true
+            : currentPage === 2
+            ? subgenre
+              ? false
+              : true
+            : currentPage === 3
+            ? subgenreName
+              ? false
+              : true
+            : currentPage === 4
+            ? ""
+            : ""
+        }
         onClick={() => nextStep()}
+        type={`${currentPage === 4 ? "submit" : "button"}`}
         className={`h-9 w-28 border-border border-2 bg-darkGray rounded-lg 
-        ${genre ? "bg-white" : "bg-border"}
+        ${
+          currentPage === 1
+            ? genre
+              ? "bg-white"
+              : "bg-white"
+            : currentPage === 2
+            ? subgenre
+              ? "bg-white"
+              : "bg-border"
+            : currentPage === 3
+            ? subgenreName
+              ? "bg-white"
+              : "bg-border"
+            : currentPage === 4
+            ? "bg-white"
+            : ""
+        }
         `}
       >
-        Next
+        {currentPage === 4 ? "Add" : "Next"}
       </button>
     </div>
   )

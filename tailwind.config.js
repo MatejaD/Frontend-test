@@ -12,6 +12,7 @@ module.exports = {
       green: "#3ec03e",
       line: "#1c1c1c",
       border: "#afafaf",
+      error: "#d90c0c",
     },
     extend: {},
   },

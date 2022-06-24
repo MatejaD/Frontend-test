@@ -1,48 +1,45 @@
-import React, { useEffect } from "react"
+import React, { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import Button_Container from "./Components/Button_Container"
-import Genre_Subgenre from "./Components/Genre_Subgenre"
+import Book_Added from "./Components/Book_Added"
+import Main from "./Components/Main"
 import Steps from "./Components/Steps"
 import dummyObject from "./dummyObject.json"
 
+// Actions
+import { SET_STATE } from "./Redux/actions"
+
 function App() {
   const dispatch = useDispatch()
-  const state = useSelector((state) => state)
-  const currentPage = useSelector((state) => state.currentPage)
-  const subgenreName = useSelector((state) => state.subgenreName)
   useEffect(() => {
-    dispatch({ type: "SET_STATE", payload: dummyObject })
+    dispatch({ type: SET_STATE, payload: dummyObject })
   }, [])
+  const [bookName, setBookName] = useState("")
 
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    if (currentPage === 2) {
-      console.log(`User picked genre: ${state.genre.name}`)
-    }
-    if (currentPage === 3) {
-      if (!subgenreName) {
-        console.log("Noice")
-      } else {
-        console.log(`Subgenre name can't be empty.`)
-      }
-    }
-  }
+  const isBookAdded = useSelector((state) => state.isBookAdded)
 
   return (
     // Background
-    <main className="font-Poppins w-screen h-screen bg-slate-200 flex justify-center items-center">
+    <main
+      style={{ minHeight: "30vh" }}
+      className="font-Poppins w-screen h-screen bg-slate-200 flex justify-center   items-start p-6 "
+    >
       {/* Container */}
-      <form
-        onSubmit={handleSubmit}
-        className="w-5/12 h-3/6 p-2 flex flex-col justify-start gap-4 items-start border-2 border-black rounded-md"
+      <div
+        style={{ minHeight: "20vh" }}
+        className="lg:w-5/12 w-2/3  p-2 mb-2  flex flex-col justify-start gap-4 items-start border-2 border-black rounded-md"
       >
-        <div className="w-full h-2 flex justify-start items-start ">
-          <h2 className="">Add Book - New Book</h2>
-        </div>
-        <Steps />
-        <Genre_Subgenre />
-        <Button_Container />
-      </form>
+        {isBookAdded ? (
+          <Book_Added />
+        ) : (
+          <>
+            <header className="w-full h-2 flex justify-start items-start ">
+              <h1 className="">Add Book - New Book</h1>
+            </header>
+            <Steps />
+            <Main />
+          </>
+        )}
+      </div>
     </main>
   )
 }
