@@ -48,7 +48,7 @@ export default function Information() {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    console.log(author)
+    console.log(state)
     console.log(currentPage)
     if (!bookTitle) {
       console.log("Book name cannot be empty")
@@ -86,10 +86,9 @@ export default function Information() {
           descriptionValue,
         }
         fakeFetch(book)
-
         dispatch({ type: BOOK_ADDED })
       }
-    } else {
+    } else if (bookTitle) {
       let book = {
         bookTitle,
         author,
@@ -102,6 +101,8 @@ export default function Information() {
         editionLanguage,
         descriptionValue,
       }
+      console.log("BOOK TITLE!")
+
       fakeFetch(book)
       dispatch({ type: BOOK_ADDED })
     }
@@ -114,7 +115,7 @@ export default function Information() {
       className="w-full px-4 mb-6  flex flex-col justify-around items-start gap-6"
     >
       <div className="relative w-full h-auto  flex flex-col items-start justify-center gap-1">
-        <label htmlFor="" className="flex gap-4 pl-2">
+        <label className="flex gap-4 pl-2">
           {"  "}
           *Book Title
           <span className={`text-error  ${errorTitle ? "block" : "hidden"}`}>
@@ -134,7 +135,7 @@ export default function Information() {
       </div>
 
       <div className="selectdiv w-full h-auto  flex flex-col items-start justify-center gap-1">
-        <label htmlFor="" className=" pl-2">
+        <label className=" pl-2">
           {"  "}
           Author
         </label>
@@ -157,7 +158,7 @@ export default function Information() {
       </div>
 
       <div className="w-full h-auto  flex flex-col items-start justify-center gap-1">
-        <label htmlFor="" className=" pl-2">
+        <label className=" pl-2">
           {"  "}
           ISBN
         </label>
@@ -171,7 +172,7 @@ export default function Information() {
       </div>
 
       <div className="selectdiv w-full h-auto  flex flex-col items-start justify-center gap-1">
-        <label htmlFor="" className=" pl-2">
+        <label className=" pl-2">
           {"  "}
           Publisher
         </label>
@@ -192,7 +193,7 @@ export default function Information() {
       </div>
 
       <div className="w-full h-auto  flex flex-col items-start justify-center gap-1">
-        <label htmlFor="" className=" pl-2">
+        <label className=" pl-2">
           {"  "}
           Date Published
         </label>
@@ -207,7 +208,7 @@ export default function Information() {
       </div>
 
       <div className="w-full h-auto  flex flex-col items-start justify-center gap-1">
-        <label htmlFor="" className=" pl-2">
+        <label className=" pl-2">
           {"  "}
           Number of pages
         </label>
@@ -222,7 +223,7 @@ export default function Information() {
       </div>
 
       <div className="selectdiv w-1/3 h-auto  flex flex-col items-start justify-center gap-1">
-        <label htmlFor="" className=" pl-2">
+        <label className=" pl-2">
           {"  "}
           Format
         </label>
@@ -242,7 +243,7 @@ export default function Information() {
 
       <div className="w-full h-auto flex justify-start items-start gap-4">
         <div className="w-1/3 h-auto  flex flex-col items-start justify-center gap-1">
-          <label htmlFor="" className=" pl-2">
+          <label className=" pl-2">
             {"  "}
             Edition
           </label>
@@ -256,7 +257,7 @@ export default function Information() {
           />
         </div>
         <div className="selectdiv w-1/3 h-auto  flex flex-col items-start justify-center gap-1">
-          <label htmlFor="" className="w-48  pl-2">
+          <label className="w-48  pl-2">
             {"  "}
             Edition Language
           </label>
@@ -276,11 +277,11 @@ export default function Information() {
 
       {/* Description */}
       <div className="w-full h-auto  flex flex-col items-start justify-center gap-1">
-        <label htmlFor="" className="flex gap-2 pl-2">
+        <label className="flex gap-2 pl-2">
           {"  "}
           {isDescriptionRequired ? "*Description" : "Description"}
           <span className={`text-error  ${errorDesc ? "block" : "hidden"}`}>
-            This Field is required
+            This field is required
           </span>
         </label>
         <textarea

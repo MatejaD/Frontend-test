@@ -29,7 +29,7 @@ export default function Add_Subgenre() {
               onChange={(e) => {
                 dispatch({
                   type: IS_DESC_REQUIRED,
-                  payload: isDescRequired ? false : true,
+                  payload: !isDescRequired,
                 })
                 setIsDescRequired(!isDescRequired)
               }}
@@ -38,8 +38,8 @@ export default function Add_Subgenre() {
               id="flexCheckDefault"
             />
             <label
-              class="form-check-label inline-block text-darkGray"
-              for="flexCheckDefault"
+              className="form-check-label inline-block text-darkGray"
+              htmlFor="flexCheckDefault"
             >
               Description is required for this subgenre
             </label>

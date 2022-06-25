@@ -21,13 +21,12 @@ export default function Button_Container() {
     if (currentPage === 3) {
       if (!subgenreName) {
       } else {
-        setLastId(lastId + 1)
-
         dispatch({ type: NEXT_STEP, payload: -1 })
+        setLastId(lastId + 1)
         dispatch({
           type: CREATE_SUBGENRE,
           payload: {
-            id: lastId,
+            id: lastId + 1,
             name: subgenreName,
             isDescriptionRequired: isDescriptionRequired,
           },
@@ -42,7 +41,11 @@ export default function Button_Container() {
   }
 
   const back = () => {
-    dispatch({ type: BACK, payload: currentPage === 4 ? 2 : 1 })
+    if (currentPage === 4) {
+      dispatch({ type: BACK, payload: 2 })
+    } else {
+      dispatch({ type: BACK, payload: 1 })
+    }
   }
 
   return (
