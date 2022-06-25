@@ -1,6 +1,6 @@
 # Start Project
 
-### 'npm install'
+### `npm install`
 ### `npm start`
 
 # Project Description
