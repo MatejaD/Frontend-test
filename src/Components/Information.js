@@ -72,7 +72,7 @@ export default function Information() {
           setErrorDesc(false)
           descriptionRef.current.style.borderColor = "#555555"
         }, 1500)
-      } else {
+      } else if (bookTitle) {
         let book = {
           bookTitle,
           author,
