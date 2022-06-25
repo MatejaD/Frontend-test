@@ -35,6 +35,7 @@ export default function Button_Container() {
     } else if (currentPage === 2) {
       dispatch({ type: NEXT_STEP, payload: 2 })
     } else if (currentPage === 4) {
+      console.log("submited")
     } else {
       dispatch({ type: NEXT_STEP, payload: 1 })
     }
@@ -72,12 +73,12 @@ export default function Button_Container() {
               ? false
               : true
             : currentPage === 4
-            ? ""
-            : ""
+            ? false
+            : false
         }
         onClick={() => nextStep()}
         type={`${currentPage === 4 ? "submit" : "button"}`}
-        className={`h-9 w-28 border-border border-2 bg-darkGray rounded-lg 
+        className={`h-9 w-28 border-border border-2  rounded-lg 
         ${
           currentPage === 1
             ? genre
@@ -93,7 +94,7 @@ export default function Button_Container() {
               : "bg-border"
             : currentPage === 4
             ? "bg-white"
-            : ""
+            : "bg-white"
         }
         `}
       >

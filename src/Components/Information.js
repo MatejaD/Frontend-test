@@ -57,7 +57,7 @@ export default function Information() {
       setTimeout(() => {
         bookTitleRef.current.style.borderColor = "#555555"
         setErrorTitle(false)
-      }, 1500)
+      }, 1000)
       bookTitleRef.current.scrollIntoView({
         behavior: "smooth",
         block: "end",
@@ -71,7 +71,7 @@ export default function Information() {
         setTimeout(() => {
           setErrorDesc(false)
           descriptionRef.current.style.borderColor = "#555555"
-        }, 1500)
+        }, 1000)
       } else if (bookTitle) {
         let book = {
           bookTitle,
